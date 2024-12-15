@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <link rel="stylesheet" href="assets/css/order-form.css">
+    <style>
+        /* Styling for the food information box */
+        .food-info-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .food-info-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .food-info-description, .food-info-price {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        // Function to update food information and check price
+        function updateFoodInfo() {
+            // Get the food input value
+            var foodInput = document.getElementById('food').value.toLowerCase();
+            var foodInfoBox = document.getElementById('food-info-box');
+            var foodTitle = document.getElementById('food-info-title');
+            var foodDescription = document.getElementById('food-info-description');
+            var foodPrice = document.getElementById('food-info-price');
+            var orderButton = document.getElementById('order-button');
+            var amountInput = document.getElementById('money').value;
+
+            // Define the available ramen types and their prices
+            var availableRamen = {
+                "niku": {name: "Niku Ramen", price: 25, description: "Niku Ramen is a rich and savory dish with tender beef and rich broth."},
+                "shoyu": {name: "Shoyu Ramen", price: 20, description: "Shoyu Ramen is a classic ramen with soy sauce-based broth."},
+                "miso": {name: "Miso Ramen", price: 22, description: "Miso Ramen has a rich miso-flavored broth, perfect for colder weather."},
+                "shio": {name: "Shio Ramen", price: 18, description: "Shio Ramen is a lighter, salt-based ramen, ideal for a delicate flavor."},
+                "vegetarian": {name: "Vegetarian Ramen", price: 20, description: "Vegetarian Ramen offers a delicious plant-based option with a flavorful broth."}
+            };
+
+            // Check if the typed input matches any ramen type
+            if (availableRamen[foodInput]) {
+                var ramen = availableRamen[foodInput];
+                foodInfoBox.style.display = "block";
+                foodTitle.innerHTML = ramen.name;
+                foodDescription.innerHTML = ramen.description;
+                foodPrice.innerHTML = "Price: RM " + ramen.price;
+
+                // Enable or disable the button based on the amount entered
+                if (amountInput >= ramen.price) {
+                    orderButton.disabled = false;
+                    orderButton.innerHTML = "Place Order";
+                } else {
+                    orderButton.disabled = true;
+                    orderButton.innerHTML = "Insufficient Funds";
+                }
+            } else {
+                foodInfoBox.style.display = "block";
+                foodTitle.innerHTML = "Unavailable";
+                foodDescription.innerHTML = "Sorry, we do not offer this item. Please choose from the menu.";
+                foodPrice.innerHTML = "";
+                orderButton.disabled = true;
+                orderButton.innerHTML = "Insufficient Funds";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Restaurant Order Form</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<main>
+    <h2>Place Your Order</h2>
+    <form action="insert-data.php" method="POST">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="money">Amount (RM)</label>
+            <input type="number" id="money" name="money" oninput="updateFoodInfo()" required>
+        </div>
+        <div class="form-group">
+            <label for="food">Food Ordered</label>
+            <input type="text" id="food" name="food" oninput="updateFoodInfo()" required>
+        </div>
+        <button type="submit" id="order-button" disabled>Place Order</button>
+    </form>
+
+    <!-- Food information box -->
+    <div id="food-info-box" class="food-info-box" style="display: none;">
+        <div id="food-info-title" class="food-info-title"></div>
+        <div id="food-info-description" class="food-info-description"></div>
+        <div id="food-info-price" class="food-info-price"></div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Restaurant | All rights reserved</p>
+</footer>
+
+</body>
+</html>

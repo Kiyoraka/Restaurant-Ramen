@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Home</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="slider">
+            <div class="slide-container">
+                <div class="slide">
+                    <img src="assets/img/slider1.png" alt="Slider Image 1">
+                </div>
+                <div class="slide">
+                    <img src="assets/img/slider2.png" alt="Slider Image 2">
+                </div>
+                <div class="slide">
+                    <img src="assets/img/slider3.png" alt="Slider Image 3">
+                </div>
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </section>
+
+        <!-- Login Button Below the Slider -->
+        <section class="login-btn-container">
+            <a href="login.html" class="login-btn">Login</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Glass Restaurant. All Rights Reserved.</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
